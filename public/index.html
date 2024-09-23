@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museo de NY</title>
+    <link rel="stylesheet" href="estylo.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <div class="titulo">
+        <div class="contenedormuseo">
+            <h1 class="museo">Museo de NY</h1>
+        </div>
+        <div class="conteiner">
+            <div id="contiene-buscador">
+                <div id="buscador"></div>
+                    <form action="" method="post">
+                        <div id="imput">
+                            <label for="departamento">Busca tu departamento favorito</label>
+                            <select name="departamento" id="departamento">
+                                <option value="">Seleccione un departamento</option>
+                            </select>
+                        </div>
+                </div>
+                <div id="buscador">
+                    <form action="" method="post">
+                        <div id="imput">
+                            <label for="palabraClave">Busca tu palabra clave</label>
+                            <input type="text" id="palabraClave">
+                        </div>
+                </div>
+                <div id="buscador">
+                    <form action="" method="post">
+                        <div id="imput">
+                            <label for="localizacion">Busca tu Localizacion favorito</label>
+                            <select name="localizacion" id="localizacion">
+                                <option value="">Seleccione una Localizacion</option>
+                                <option value="China">China</option>
+                                <option value="France">Francia</option>
+                                <option value="Paris">Paris</option>
+                                <option value="Europe">Europa</option>
+                                <option value="New York">Nueva York</option>
+                                <option value="Japón">Japon</option>
+                            </select>
+                        </div>
+                </div>
+                <button id="boton">Buscar</button>
+            </div>
+            <div id="grilla">
+                <div class="objeto">
+                    <img src="" alt="">
+                    <h3 class="title">Titulo</h3>
+                    <h3 class="cultura">Cultura</h3>
+                    <h3 class="dinastia">Dinastia</h3> 
+            </div>           
+        </div>
+    </div> 
+</body>
+<footer>
+    <div id="paginacion">
+        <button id="botonAnterior">Anterior</button>
+        <span id="paginaActual">Página 1 de X</span>
+        <button id="botonSiguiente">Siguiente</button>
+    </div>
+</footer>    
+</html>
