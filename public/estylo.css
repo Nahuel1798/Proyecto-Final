@@ -154,44 +154,67 @@ button:hover {
 
 .footer{
     background-color: black;
-    padding: 1em 0;
+    padding: auto;
     text-align: center;
     margin-top: auto;
 }
 
-/* Estilo adicional para el contenedor de paginación */
+/* Estilo adicional para el contenedor de paginación 
 #paginacion {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    margin-top: 10px; 
-    background-color: black;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 #paginacion button {
-    padding: 10px 15px; 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    transition: background-color 0.3s; 
-}
-
-#paginacion button:hover {
-    background-color: #0056b3; 
+    padding: 5px;
+    margin: 0 10px;
 }
 
 #paginaActual {
-    margin: 0 15px; 
-    font-weight: bold; 
-    color: white; 
+    font-size: 16px;
+    margin: 0 10px;
+}*/
+footer {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.conteiner label {
-    margin: 10px 0;
-    font-weight: bold;
+#paginacion {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
 }
+
+#botonAnterior, #botonSiguiente {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#botonAnterior:hover, #botonSiguiente:hover {
+    background-color: #0056b3;
+}
+
+#paginaActual {
+    font-weight: bold;
+    color: #333;
+}
+
+#botonAnterior:disabled, #botonSiguiente:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 
 
 
