@@ -8,8 +8,8 @@
 
 .imagen-adicional {
     width: 100%;
-    max-width: 250px; /* Tamaño máximo */
-    max-height: 250px; /* Tamaño máximo */
+    max-width: 250px; 
+    max-height: 250px; 
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -24,17 +24,17 @@ h1 {
 
 button {
     padding: 10px 15px;
-    background-color: #4CAF50; /* Verde */
+    background-color: #4CAF50; 
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     display: block;
-    margin: 20px auto; /* Centro el botón */
+    margin: 20px auto; 
 }
 
 button:hover {
-    background-color: #45a049; /* Verde más oscuro */
+    background-color: #45a049; 
 }
 

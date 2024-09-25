@@ -5,6 +5,13 @@
     color:black;
 }
 
+.body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
 .titulo {
     background-color: black;
 }
@@ -22,23 +29,26 @@
     color: white;
 }
 
-
+/* Buscador */
 .conteiner{
     display: flex;
     flex-direction: row;
-    
 }
 
-/* Buscador */
+
 #contiene-buscador {
     display: flex; 
-    flex-direction: column; 
+    flex-direction: column;
+    padding: 0px 50px;
+    margin: 0px 5px;
 }
 
 #buscador {
     display: flex; 
     flex-direction: column; 
-    padding: 0px 150px;
+    justify-content: center;
+    gap: 30px; 
+    padding: 0 60px;
 }
 
 
@@ -51,13 +61,13 @@
 
 #imput {
     flex: 1; 
-    margin-right: 10px; 
+    margin-right: 5px; 
 }
 
 
 label {
     display: block; 
-    margin-bottom: 5px; 
+    margin-bottom: 10px; 
     font-weight: bold; 
 }
 
@@ -141,7 +151,7 @@ button {
     padding: 8px 12px;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF; /* Azul */
+    background-color: #007BFF; 
     color: white;
     cursor: pointer;
     font-size: 14px;
@@ -149,7 +159,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3; /* Azul más oscuro */
+    background-color: #0056b3; 
 }
 
 .footer{
@@ -159,23 +169,6 @@ button:hover {
     margin-top: auto;
 }
 
-/* Estilo adicional para el contenedor de paginación 
-#paginacion {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-#paginacion button {
-    padding: 5px;
-    margin: 0 10px;
-}
-
-#paginaActual {
-    font-size: 16px;
-    margin: 0 10px;
-}*/
 footer {
     background-color: #f8f8f8;
     padding: 20px;
