@@ -14,6 +14,8 @@
 
 .titulo {
     background-color: black;
+    display: flex;
+    flex-direction: column;
 }
 
 .contenedormuseo{
@@ -32,7 +34,9 @@
 /* Buscador */
 .conteiner{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    background-color: black;
+    align-items: center;
 }
 
 
@@ -41,6 +45,7 @@
     flex-direction: column;
     padding: 0px 50px;
     margin: 0px 5px;
+    background-color: gray;
 }
 
 #buscador {
@@ -118,6 +123,10 @@ select {
     padding: 20px; 
 }
 
+.resultado {
+    color: white;
+}
+
 .objeto {
     background-color: #fff; 
     border: 1px solid #ddd; 
@@ -162,15 +171,9 @@ button:hover {
     background-color: #0056b3; 
 }
 
-.footer{
-    background-color: black;
-    padding: auto;
-    text-align: center;
-    margin-top: auto;
-}
 
 footer {
-    background-color: #f8f8f8;
+    background-color: gray;
     padding: 20px;
     text-align: center;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);

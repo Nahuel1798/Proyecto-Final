@@ -92,7 +92,7 @@ async function buscarObjetosConImagenes() {
     }
 }
 
-
+//Paginacion
 function obtenerObjetosConPaginacion(objectIDs, page = 1, objetosPorPagina = 20) {
     let objetoHtml = "";
     const offset = (page - 1) * objetosPorPagina;
@@ -107,6 +107,7 @@ function obtenerObjetosConPaginacion(objectIDs, page = 1, objetosPorPagina = 20)
                         traducirTexto(data.culture),
                         traducirTexto(data.dynasty)
                     ]).then(([tituloTraducido, culturaTraducida, dinastiaTraducida]) => {
+                        const tieneImagenesAdicionales = data.additionalImages && data.additionalImages.length > 0;
                         objetoHtml += `
                             <div class="objeto">
                                 <alt="${tituloTraducido}" title="${data.objectDate || 'Fecha no disponible'}" />
@@ -114,6 +115,7 @@ function obtenerObjetosConPaginacion(objectIDs, page = 1, objetosPorPagina = 20)
                                 <h3 class="title">${tituloTraducido}</h3>
                                 <h3 class="cultura">${culturaTraducida ? culturaTraducida : "Sin datos"}</h3>
                                 <h3 class="dinastia">${dinastiaTraducida ? dinastiaTraducida : "Sin datos"}</h3>
+                                ${tieneImagenesAdicionales ? `<button onclick="verImagenesAdicionales(${data.objectID})">Ver más imágenes</button>` : ''}                                
                             </div>
                         `;
                         document.getElementById("grilla").innerHTML = objetoHtml;
@@ -187,7 +189,7 @@ function realizarBusqueda() {
                 configurarPaginacion(data.objectIDs.length);
             } else {
                 console.log('No se encontraron objetos, se mostrara la grilla vacía.');
-                grilla.innerHTML = "<p>No se encontraron objetos.</p>";;
+                grilla.innerHTML = "<p class=resultado>No se encontraron objetos.</p>";;
             }
         })
         .catch(error => console.error('Error en la búsqueda de objetos:', error));
