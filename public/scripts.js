@@ -1,6 +1,6 @@
 const URL_DEPARTAMENTOS = "https://collectionapi.metmuseum.org/public/collection/v1/departments";
 const URL_OBJETO = "https://collectionapi.metmuseum.org/public/collection/v1/objects/"; 
-const URL_SEARCH_IMAGES = "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=flowers"; // Filtrar solo objetos con imágenes
+const URL_SEARCH_IMAGES = "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=Arts"; // Filtrar solo objetos con imágenes
 const URL_SEARCH = "https://collectionapi.metmuseum.org/public/collection/v1/search";
 
 // Función para obtener los departamentos y agregarlos al select
@@ -41,6 +41,7 @@ async function traerObjetos(objectIDs) {
                         <button onclick="verImagenesAdicionales(${objectId})">Ver imágenes adicionales</button>
                     `;
                 }
+                
                 const tituloTraducido = await traducirTexto(data.title);
                 const culturaTraducida = await traducirTexto(data.culture);
                 const dinastiaTraducida = await traducirTexto(data.dynasty);
@@ -54,7 +55,7 @@ async function traerObjetos(objectIDs) {
                         ${botonHtml}
                     </div>
                 `;
-
+            
         } catch (error) {
             console.error('Error al obtener detalles del objeto:', error);
         }
@@ -198,6 +199,8 @@ function realizarBusqueda() {
 document.getElementById("boton").addEventListener("click", (event) => {
     event.preventDefault();
     realizarBusqueda();
+    // Limpia el campo de palabra clave
+    document.getElementById("palabraClave").value = "";
 });
 
 obtenerDepartamentos();

@@ -8,12 +8,13 @@
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
-    padding: 20px;
+    padding: 0px;
 }
 
 .titulo {   
     display: flex;
     flex-direction: column;
+    background-color: black;
 }
 
 .contenedormuseo{
@@ -40,7 +41,6 @@
 #contiene-buscador {
     display: flex; 
     flex-direction: row;
-    background-color: gray;
     gap: 20px; 
     padding: 20px; 
 }
@@ -103,10 +103,10 @@ select {
 .conteiner {
     max-width: auto; 
     margin: auto; 
-    padding: 5px; 
-    border: 1px solid #ddd; 
+    padding: 0; 
+    border: 0; 
     border-radius: 8px; 
-    background-color: #f9f9f9; 
+    background-color: gray;  
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
@@ -118,6 +118,7 @@ select {
     grid-template-rows: auto;
     gap: 20px; 
     padding: 20px; 
+    background-color: black;
 }
 
 .resultado {
