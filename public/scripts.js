@@ -20,7 +20,7 @@ function obtenerDepartamentos() {
 }
 
 // Función para obtener detalles de los objetos a partir de una lista de objectIDs
-async function traerObjetos(objectIDs) {
+/*async function traerObjetos(objectIDs) {
     let objetoHtml = "";
     for (const objectId of objectIDs) {
         try {
@@ -62,7 +62,83 @@ async function traerObjetos(objectIDs) {
     }
 
     document.getElementById("grilla").innerHTML = objetoHtml;
+}*/
+
+function configurarPaginacionInicio(totalObjetos, paginaActual = 1) {
+    const totalPaginas = Math.ceil(totalObjetos / 20);
+    const paginacionDiv = document.getElementById('paginacion');
+    const maxPaginasVisibles = 5;
+    let inicioPagina = Math.max(1, paginaActual - Math.floor(maxPaginasVisibles / 2));
+    let finPagina = Math.min(totalPaginas, inicioPagina + maxPaginasVisibles - 1);
+
+    // Ajustar el rango de páginas si está en los extremos
+    if (finPagina - inicioPagina < maxPaginasVisibles - 1) {
+        inicioPagina = Math.max(1, finPagina - maxPaginasVisibles + 1);
+    }
+
+    paginacionDiv.innerHTML = ''; // Limpiar paginación anterior
+
+    // Botón "Anterior"
+    if (paginaActual > 1) {
+        const botonAnterior = document.createElement('button');
+        botonAnterior.textContent = 'Anterior';
+        botonAnterior.disabled = paginaActual === 1; // Deshabilitar si es la primera página
+        botonAnterior.addEventListener('click', () => {
+            configurarPaginacion(totalObjetos, paginaActual - 1); // Llama a la función con la página anterior
+            buscarObjetosConImagenes(paginaActual - 1);
+        });
+        paginacionDiv.appendChild(botonAnterior);
+    }
+
+    // Páginas numeradas
+    for (let i = inicioPagina; i <= finPagina; i++) {
+        const boton = document.createElement('button');
+        boton.textContent = i;
+        if (i === paginaActual) {
+            boton.classList.add('active'); // Resaltar la página actual
+        }
+        boton.addEventListener('click', () => {
+            configurarPaginacion(totalObjetos, i); // Llama a la función con la página seleccionada
+            buscarObjetosConImagenes(i);
+        });
+        paginacionDiv.appendChild(boton);
+    }
+
+    // Botón "Siguiente"
+    if (paginaActual < totalPaginas) {
+        const botonSiguiente = document.createElement('button');
+        botonSiguiente.textContent = 'Siguiente';
+        botonSiguiente.disabled = paginaActual === totalPaginas; // Deshabilitar si es la última página
+        botonSiguiente.addEventListener('click', () => {
+            configurarPaginacion(totalObjetos, paginaActual + 1); // Llama a la función con la página siguiente
+            buscarObjetosConImagenes(paginaActual + 1);
+        });
+        paginacionDiv.appendChild(botonSiguiente);
+    }
+
+    // Opcional: Botones de Inicio y Fin
+    if (paginaActual > 1) {
+        const botonInicio = document.createElement('button');
+        botonInicio.textContent = 'Inicio';
+        botonInicio.addEventListener('click', () => {
+            configurarPaginacion(totalObjetos, 1); // Ir a la primera página
+            buscarObjetosConImagenes(1);
+        });
+        paginacionDiv.prepend(botonInicio);
+    }
+
+    if (paginaActual < totalPaginas) {
+        const botonFin = document.createElement('button');
+        botonFin.textContent = 'Fin';
+        botonFin.addEventListener('click', () => {
+            configurarPaginacion(totalObjetos, totalPaginas); // Ir a la última página
+            buscarObjetosConImagenes(totalPaginas);
+        });
+        paginacionDiv.appendChild(botonFin);
+    }
 }
+
+
 
 function verImagenesAdicionales(objectId) {
     fetch(URL_OBJETO + objectId)
@@ -76,15 +152,21 @@ function verImagenesAdicionales(objectId) {
         .catch(error => console.error('Error al obtener imágenes adicionales:', error));
 }
 
-// Hacemos la búsqueda inicial para obtener con imagenes
-async function buscarObjetosConImagenes() {
+// Hacemos la búsqueda inicial para obtener con imágenes con paginación
+async function buscarObjetosConImagenes(page = 1, objetosPorPagina = 20) {
     try {
         const response = await fetch(URL_SEARCH_IMAGES);
         const data = await response.json();
 
         if (data.objectIDs && data.objectIDs.length > 0) {
-            // Limitar a los primeros 20 objectIDs
-            await traerObjetos(data.objectIDs.slice(0, 20));
+            // Total de objetos
+            const totalObjetos = data.objectIDs.length;
+
+            // Configurar la paginación
+            configurarPaginacionInicio(totalObjetos, page);
+
+            // Obtener los objetos para la página actual
+            obtenerObjetosConPaginacion(data.objectIDs, page, objetosPorPagina);
         } else {
             console.log('No se encontraron objetos.');
         }
@@ -92,6 +174,7 @@ async function buscarObjetosConImagenes() {
         console.error('Error en la búsqueda de objetos:', error);
     }
 }
+
 
 //Paginacion
 function obtenerObjetosConPaginacion(objectIDs, page = 1, objetosPorPagina = 20) {
@@ -153,20 +236,58 @@ async function traducirTexto(texto) {
 }
 
 // Paginación
-function configurarPaginacion(totalObjetos) {
+function configurarPaginacion(totalObjetos, paginaActual = 1) {
     const totalPaginas = Math.ceil(totalObjetos / 20);
     const paginacionDiv = document.getElementById('paginacion');
+    const maxPaginasVisibles = 5;
+    let inicioPagina = Math.max(1, paginaActual - Math.floor(maxPaginasVisibles / 2));
+    let finPagina = Math.min(totalPaginas, inicioPagina + maxPaginasVisibles - 1);
+
+    // Ajustar el rango de páginas si está en los extremos
+    if (finPagina - inicioPagina < maxPaginasVisibles - 1) {
+        inicioPagina = Math.max(1, finPagina - maxPaginasVisibles + 1);
+    }
+
     paginacionDiv.innerHTML = '';
 
-    for (let i = 1; i <= totalPaginas; i++) {
+    // Botón "Anterior"
+    if (paginaActual > 1) {
+        const botonAnterior = document.createElement('button');
+        botonAnterior.textContent = 'Anterior';
+        botonAnterior.addEventListener('click', () => {
+            configurarPaginacion(totalObjetos, paginaActual - 1);
+            obtenerObjetosConPaginacion(currentObjectIDs, paginaActual - 1);
+        });
+        paginacionDiv.appendChild(botonAnterior);
+    }
+
+    // Páginas numeradas
+    for (let i = inicioPagina; i <= finPagina; i++) {
         const boton = document.createElement('button');
         boton.textContent = i;
+        if (i === paginaActual) {
+            boton.classList.add('active'); // Puedes añadir una clase para el estilo de la página actual
+        }
         boton.addEventListener('click', () => {
+            configurarPaginacion(totalObjetos, i);
             obtenerObjetosConPaginacion(currentObjectIDs, i);
         });
         paginacionDiv.appendChild(boton);
     }
+
+    // Botón "Siguiente"
+    if (paginaActual < totalPaginas) {
+        const botonSiguiente = document.createElement('button');
+        botonSiguiente.textContent = 'Siguiente';
+        botonSiguiente.addEventListener('click', () => {
+            configurarPaginacion(totalObjetos, paginaActual + 1);
+            obtenerObjetosConPaginacion(currentObjectIDs, paginaActual + 1);
+        });
+        paginacionDiv.appendChild(botonSiguiente);
+    }
 }
+
+
 
 // Función para realizar la búsqueda con los filtros proporcionados
 function realizarBusqueda() {
@@ -205,6 +326,8 @@ document.getElementById("boton").addEventListener("click", (event) => {
 
 obtenerDepartamentos();
 buscarObjetosConImagenes();
+
+
 
 
 
