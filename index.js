@@ -32,7 +32,11 @@ app.get('/traducir', async(req, res) => {
         res.status(500).json({ error: 'Hubo un problema al traducir el texto' });
     }
 });
-    
+
+app.get('/imagenesAdicional/imagenes-adicionales.html', (req, res) => {
+    res.sendFile(__dirname + '/imagenesAdicional/imagenes-adicionales.html');
+  });
+  
 
 app.listen(port, () => {
     console.log(`server is running on:${port}`);

@@ -100,7 +100,7 @@ function verImagenesAdicionales(objectId) {
         .then(data => {
             if (data.additionalImages && data.additionalImages.length > 0) {
                 sessionStorage.setItem('imagenesAdicionales', JSON.stringify(data.additionalImages));
-                window.location.href = 'imagenesAdicional/imagenes-adicionales.html';
+                window.location.href = 'imagenes-adicionales.html';
             }
         })
         .catch(error => console.error('Error al obtener imágenes adicionales:', error));
